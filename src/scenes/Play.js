@@ -100,7 +100,6 @@ class Play extends Phaser.Scene {
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.ship04.superspeed();
-        this.clockRight.text = Math.floor((game.settings.gameTimer - this.time.now + this.time.startTime)/1000 + this.addtime);
         this.clock = this.time.delayedCall(30000, () => {
             this.ship01.speedup();
             this.ship02.speedup();
@@ -235,30 +234,5 @@ class Play extends Phaser.Scene {
 
         this.sound.play('sfx_explosion');
     }
-    addTime(){
-        let scoreConfig = {
-            fontFamily: 'Cursive',
-            fontSize: '20px',
-            backgroundColor: '#F3B141',
-            color: 'White',
-            align: 'left',
-            padding: {
 
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-        this.time.removeEvent(this.clock);
-        this.addtime = this.addtime + 1;
-        this.clock = this.time.delayedCall(game.settings.gameTimer - this.time.now + this.time.startTime + this.addtime*1000, () => {
-          this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-          this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
-          this.gameOver = true;
-          if(config.bestpoint < this.p1Score){
-            config.bestpoint = this.p1Score;
-          }
-        }, null, this);
-      }
-  
 }
