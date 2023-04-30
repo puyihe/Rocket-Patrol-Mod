@@ -15,17 +15,17 @@ class Menu extends Phaser.Scene {
     create() {
       // menu text configuration
       let menuConfig = {
-          fontFamily: 'Cursive',
-          fontSize: '30px',
-          backgroundImage: 'background',
-          color: 'black',
-          align: 'right',
-          padding: {
-              top: 5,
-              bottom: 5,
-          },
-          fixedWidth: 0
-      }
+        fontFamily: 'Courier',
+        fontSize: '28px',
+        backgroundColor: '#F3B141',
+        color: '#843605',
+        align: 'right',
+        padding: {
+          top: 5,
+          bottom: 5,
+        },
+        fixedWidth: 0
+    }
       this.sound.play('BGM');
       // show menu text
       this.starfield = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
