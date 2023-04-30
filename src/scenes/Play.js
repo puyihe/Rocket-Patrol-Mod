@@ -18,6 +18,8 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        // create timer text object
+        this.timerText = this.add.text(game.config.width - borderUISize - borderPadding, borderUISize + borderPadding, '', scoreConfig).setOrigin(1, 0);
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
         this.gm2 = this.add.tileSprite(0, 30, 640, 80, 'BG2').setOrigin(0, 0);
@@ -113,8 +115,6 @@ class Play extends Phaser.Scene {
             }
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← to Menu', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width - 128, game.config.height - 80, 'Andy was here', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width - 128, game.config.height - 60, 'Erick saw it ', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
 
@@ -122,6 +122,19 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        // update timer and text object
+        const remainingTime = Math.max(0, (game.settings.gameTimer - this.clock.elapsed) / 1000);
+        this.timerText.text = 'Time: ' + remainingTime.toFixed(0);
+
+        // check key input for restart / menu
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.scene.restart();
+        }
+
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.scene.start("menuScene");
+        }
+
         // check key input for restart / menu
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
@@ -202,11 +215,20 @@ class Play extends Phaser.Scene {
             rocket.x + rocket.width > ship.x &&
             rocket.y < ship.y + ship.height &&
             rocket.height + rocket.y > ship.y) {
-            return true;
+          // add time when rocket hits the ship
+          if (ship.texture.key === 'spaceship04') {
+            // add 5 seconds when rocket hits the supership
+            this.clock.elapsed += 5000;
+          } else {
+            // add 2 seconds when rocket hits other ships
+            this.clock.elapsed += 2000;
+          }
+          return true;
         } else {
-            return false;
+          return false;
         }
-    }
+      }
+      
 
     shipExplode(ship) {
         // temporarily hide ship

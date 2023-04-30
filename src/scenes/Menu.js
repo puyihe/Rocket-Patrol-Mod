@@ -60,7 +60,7 @@ class Menu extends Phaser.Scene {
           // Expert mode
           game.settings = {
               spaceshipSpeed: 4,
-              gameTimer: 45000
+              gameTimer: 60000
 
           }
 
