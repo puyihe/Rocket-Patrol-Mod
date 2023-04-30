@@ -19,10 +19,11 @@ Implement an alternating two-player mode (15)
 Implement a new timing/scoring mechanism that adds time to the clock for successful hits (15)
 */
 let config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     width: 640,
     height: 480,
-    scene: [ Menu, Play ]
+    scene: [ Menu, Play ],
+    bestpoint:0
 }
 
 let game = new Phaser.Game(config);
