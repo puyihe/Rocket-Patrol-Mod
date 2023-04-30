@@ -31,7 +31,6 @@ class Menu extends Phaser.Scene {
       this.starfield = this.add.tileSprite(0, 0, 640, 480, 'background').setOrigin(0, 0);
       this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding, 'EVIL CUPIT', menuConfig).setOrigin(0.5);
       this.add.text(game.config.width / 2, game.config.height / 2, 'For P1 Use ←→ arrows to move & (L) to fire', menuConfig).setOrigin(0.5);
-      this.add.text(game.config.width / 2, game.config.height / 2 + borderUISize + borderPadding, 'For P2 Use (A)(D) to move & (G) to fire', menuConfig).setOrigin(0.5);
       this.add.text(game.config.width / 2, game.config.height / 2 + borderUISize * 2 + borderPadding * 2, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
 
       menuConfig.color = '#000';
